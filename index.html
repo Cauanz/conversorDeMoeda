@@ -6,16 +6,30 @@
     <link rel="stylesheet" href="index.css">
     <title>Vite App</title>
   </head>
-  <body class="h-screen">
-      <div class="container flex justify-center items-center bg-gray-200 p-4 rounded-lg w-72 h-44">
+  <body class="h-screen flex justify-center items-center">
+      <div class="container flex justify-around items-center bg-gray-200 p-4 rounded-lg w-4/5 h-44">
 
 
-        <select name="firstCurrency" id="firstCurrency" class="mr-2 p-2 border border-gray-300 rounded">
-        </select>
+        <div class="flex flex-col">
+          <select name="firstCurrency" id="firstCurrency" class="mr-2 p-2 border border-gray-300 rounded">
+          </select>
 
+          <input type="number" name="firstValue" id="firstValue" class="rounded-md p-2 my-3">
+        </div>
 
-        <select name="secondCurrency" id="secondCurrency" class="p-2 border border-gray-300 rounded">
-        </select>
+        <span>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+            <path fill-rule="evenodd" d="M15.97 2.47a.75.75 0 0 1 1.06 0l4.5 4.5a.75.75 0 0 1 0 1.06l-4.5 4.5a.75.75 0 1 1-1.06-1.06l3.22-3.22H7.5a.75.75 0 0 1 0-1.5h11.69l-3.22-3.22a.75.75 0 0 1 0-1.06Zm-7.94 9a.75.75 0 0 1 0 1.06l-3.22 3.22H16.5a.75.75 0 0 1 0 1.5H4.81l3.22 3.22a.75.75 0 1 1-1.06 1.06l-4.5-4.5a.75.75 0 0 1 0-1.06l4.5-4.5a.75.75 0 0 1 1.06 0Z" clip-rule="evenodd" />
+          </svg>
+        </span>
+        
+
+        <div class="flex flex-col">
+          <select name="secondCurrency" id="secondCurrency" class="p-2 border border-gray-300 rounded">
+          </select>
+
+          <input type="number" name="secondValue" id="secondValue" class="rounded-md p-2 my-3" disabled>
+        </div>
       </div>
     <script type="module" src="/main.js"></script>
   </body>
