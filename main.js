@@ -16,10 +16,9 @@ window.onload = () => {
 
     let currenciesOrigin = [];
     for (const coin in data.data) {
-      console.log(data.data[coin].name);
+      /* console.log(data.data[coin].name); */
       currenciesOrigin.push(data.data[coin].name);
     }
-      /* console.log(data.data) */
 
       //* Estamos estudando frontend, um pouco requisições, aqui não estamos estudando autenticação, talvez estudar a tarde, aqui é HTML, DOM manipulation, e uso de APIs
 
@@ -47,41 +46,45 @@ window.onload = () => {
 }
 
 //Quando a primeira moeda mudar
-firstCurrencyInput.addEventListener('change', () => {
+firstCurrencyInput.addEventListener('change', async () => {
   const baseCurrency = firstCurrencyInput.value;
   const secondCurrency = secondCurrencyInput.value;
-  console.log(baseCurrency)
   
-  const currencyTax = CalcCurrency(baseCurrency, secondCurrency);
+  const currencyTax = await CalcCurrency(baseCurrency, secondCurrency)
 
+  let userInput = inputCurrency.value;
+  let tax = Object.values(currencyTax.data);
+  let output = outputCurrency;
 
+  output.value = (userInput * tax[0]).toFixed(2);
 
 })
 
 //Quando a segunda moeda mudar
-secondCurrencyInput.addEventListener('change', () => {
+secondCurrencyInput.addEventListener('change', async () => {
   const baseCurrency = firstCurrencyInput.value;
   const secondCurrency = secondCurrencyInput.value;
-  
-  CalcCurrency(baseCurrency, secondCurrency)
-  .then((data) => console.log(data))
 
-  //TODO - Concertar isso, tratar a promisse acima para devolver a taxa de cambio da função que faz fetch abaixo
+  const currencyTax = await CalcCurrency(baseCurrency, secondCurrency)
 
   let userInput = inputCurrency.value;
+  let tax = currencyTax.data[secondCurrency];
   let output = outputCurrency;
 
-  console.log(userInput, currencyTax)
+  console.log(tax)
 
-  output.textContent = userInput * currencyTax;
+  output.value = (userInput * tax).toFixed(2);
 
 })
 
 
-const CalcCurrency = (actualCurrency, destinyCurrency) => {
+const CalcCurrency = async (actualCurrency, destinyCurrency) => {
   return fetch(`https://api.freecurrencyapi.com/v1/latest?apikey=fca_live_iJgIky3MdXbi03xXecRObIUECHYr579od9z7aJz4&currencies=${destinyCurrency}&base_currency=${actualCurrency}`)
   .then((res) => res.json())
   .then((data) => {
     return data;
+  })
+  .catch((err) => {
+    console.log(`CalcCurrencyError: ${err}`)
   })
 }
